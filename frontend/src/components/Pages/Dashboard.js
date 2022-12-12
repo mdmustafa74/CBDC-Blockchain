@@ -1,10 +1,11 @@
+import React from "react";
 import { useState, useEffect } from "react";
-import "../App.css";
+import "../../App.css";
 import Web3 from "web3";
 import detectEthereumProvider from "@metamask/detect-provider";
-import { loadContract } from "../utils/load-contract";
+import { loadContract } from "../../utils/load-contract";
 
-export default function AutoBalancing(props) {
+const Dashboard = (props) => {
   const [web3Api, setWeb3Api] = useState({
     provider: null,
     web3: null,
@@ -62,9 +63,9 @@ export default function AutoBalancing(props) {
 
   const transferFund = async () => {
     const { web3, contract } = web3Api;
+    console.log(receiverAddress);
     await contract.transfer({
       from: account,
-      to: receiverAddress,
       value: web3.utils.toWei(sendAmount, "ether"),
     });
     reloadEffect();
@@ -72,7 +73,7 @@ export default function AutoBalancing(props) {
 
   const withdrawFund = async () => {
     const { contract, web3 } = web3Api;
-    const withdrawAmout = web3.utils.toWei("2", "ether");
+    const withdrawAmout = web3.utils.toWei(sendAmount, "ether");
     await contract.withdraw(withdrawAmout, {
       from: account,
     });
@@ -88,16 +89,15 @@ export default function AutoBalancing(props) {
     };
     web3Api.web3 && getAccount();
   }, [web3Api.web3, reload]);
-
   return (
-    <>
+    <div>
       <div className="container">
         <div className="card">
           <div className="card-header">{props.title}</div>
           <div className="card-body body-style">
             <form>
               <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label">
+                <label htmlFor="receiverAddress" className="form-label">
                   Receiver address
                 </label>
                 <input
@@ -107,7 +107,7 @@ export default function AutoBalancing(props) {
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="exampleInputPassword1" className="form-label">
+                <label htmlFor="sendAmount" className="form-label">
                   Enter Amount
                 </label>
                 <input
@@ -145,6 +145,7 @@ export default function AutoBalancing(props) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
+export default Dashboard;
