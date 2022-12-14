@@ -7,24 +7,24 @@ export const SidebarData = [
     title: "Dashboard",
     path: "/",
     icon: <MdAccountBalance />,
-    cName: "nav-text"
+    cName: "mt-1"
   },
   {
     title: "Account Details",
     path: "/accountDetails",
     icon: <MdDashboard />,
-    cName: "nav-text"
+    cName: "mt-1"
   },
   {
     title: "Payment",
     path: "/payment",
     icon: <MdPayment />,
-    cName: "nav-text"
+    cName: "mt-1"
   },
   {
     title: "Self Service",
     path: "/selfservice",
     icon: <MdOutlineMiscellaneousServices />,
-    cName: "nav-text"
+    cName: "mt-1"
   },
 ];

@@ -6,3 +6,6 @@
 .app {
 	font-size: 14px;
   }
+  .top-header {
+	padding: 13px 0px !important;
+  }

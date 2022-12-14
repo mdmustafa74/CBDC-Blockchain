@@ -14,6 +14,7 @@ const Dashboard = (props) => {
 
   const [account, setAccount] = useState(null);
   const [balance, setBalance] = useState(null);
+ 
   const [reload, shouldReload] = useState(false);
   const [sendAmount, setSendAmount] = useState("");
   const [receiverAddress, setReceiverAddress] = useState("");
@@ -83,6 +84,7 @@ const Dashboard = (props) => {
   useEffect(() => {
     const getAccount = async () => {
       const accounts = await web3Api.web3.eth.getAccounts();
+     
       const balance = await web3Api.web3.eth.getBalance(accounts[0]);
       setBalance(web3Api.web3.utils.fromWei(balance, "ether"));
       setAccount(accounts[0]);
@@ -91,59 +93,55 @@ const Dashboard = (props) => {
   }, [web3Api.web3, reload]);
   return (
     <div>
-      <div className="container">
-        <div className="card">
-          <div className="card-header">{props.title}</div>
-          <div className="card-body body-style">
-            <form>
-              <div className="mb-3">
-                <label htmlFor="receiverAddress" className="form-label">
-                  Receiver address
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  onChange={handleAddress}
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="sendAmount" className="form-label">
-                  Enter Amount
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  onChange={handleChange}
-                />
-              </div>
-              <button
-                type="button"
-                className="btn btn-success "
-                onClick={transferFund}
-              >
-                Transfer
-              </button>
-              &nbsp;
-              <button
-                type="button"
-                className="btn btn-primary "
-                onClick={withdrawFund}
-              >
-                Withdraw
-              </button>
-            </form>
-            <h5 className="card-title">Balance: {balance} ETH </h5>
-            <p className="card-text">
-              Account :{" "}
-              {account
-                ? account
-                : " Wallet not connected, Pls connect your wallet!"}
-            </p>
-          </div>
-          <div className="card-footer text-muted text-center footer-style">
-            Blockchain
-          </div>
+      <div className="card bg-info">
+        <div className="card-header">{props.title}</div>
+        <div className="card-body body-style">
+          <form>
+            <div className="mb-3">
+              <label htmlFor="receiverAddress" className="form-label">
+                Receiver address
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                onChange={handleAddress}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="sendAmount" className="form-label">
+                Enter Amount
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                onChange={handleChange}
+              />
+            </div>
+            <button
+              type="button"
+              className="btn btn-success "
+              onClick={transferFund}
+            >
+              Transfer
+            </button>
+            &nbsp;
+            <button
+              type="button"
+              className="btn btn-primary "
+              onClick={withdrawFund}
+            >
+              Withdraw
+            </button>
+          </form>
+          <h5 className="card-title">Balance: {balance} ETH </h5>
+          <p className="card-text">
+            Account :{" "}
+            {account
+              ? account
+              : " Wallet not connected, Pls connect your wallet!"}
+          </p>
         </div>
+        <div className="card-footer text-center text-white">Blockchain</div>
       </div>
     </div>
   );

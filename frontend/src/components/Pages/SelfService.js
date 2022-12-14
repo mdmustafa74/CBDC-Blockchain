@@ -3,7 +3,7 @@ import React from "react";
 const SelfService = () => {
   return (
     <div>
-      <h>This is self service</h>
+      <h3>This is self service</h3>
     </div>
   );
 };
